@@ -4,7 +4,7 @@ type Movie {
     rating: Float!
     summury: String!
     language: String!
-    mmedium_cover_image: String!
+    medium_cover_image: String!
 }
 
 
