@@ -1,64 +1,16 @@
-let movies = [
-    {
-        id: 0,
-        name: "Nicolas",
-        score: 18,
-    },
-    {
-        id: 1,
-        name: "Jisu",
-        score: 18,
-    },
-    {
-        id: 2,
-        name: "Japan Guy",
-        score: 18,
-    },
-    {
-        id: 3,
-        name: "Daal",
-        score: 18,
-    },
-    {
-        id: 4,
-        name: "JD",
-        score: 18,
-    },
-    {
-        id: 5,
-        name: "moondaddi",
-        score: 18,
-    },
-    {
-        id: 6,
-        name: "flynn",
-        score: 18,
+import fetch from "node-fetch";
+
+const API_URL = "https://yts.mx/api/v2/list_movies.json?";
+
+export const getMovies = async (limit, rating) => {
+    let REQUEST_URL = API_URL;
+    if(limit > 0){
+        REQUEST_URL += `&limit=${limit}`;
     }
-];
-
-export const getMovies = () => movies;
-
-export const getById = id => {
-    const filteredMovies = movies.filter(movie => movie.id === id);
-    return filteredMovies[0];
-};
-
-export const deleteMovie = (id) => {
-    const cleansMovies = movies.filter(movie => movie.id !== id)
-    if(movies.length > cleansMovies.length){
-        movies = cleansMovies;
-        return true;
-    } else {
-        return false;
+    if(rating > 0){
+        REQUEST_URL += `&minimum_rating=${rating}`;
     }
-}
-
-export const addMovie = (name, score) => {
-    const newMovie = {
-        id: `${movies.length + 1}`,
-        name,
-        score
-    };
-    movies.push(newMovie);
-    return newMovie;
+    const res = await fetch(REQUEST_URL);
+    const json = await res.json();
+    return json.data.movies;
 }
