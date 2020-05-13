@@ -2,7 +2,7 @@ import axios from "axios";
 
 const BASE_URL = "https://yts.mx/api/v2/";
 const LIST_MOVIES_URL = `${BASE_URL}list_movies.json`;
-const MOVIE_DETAIL_URL = `${BASE_URL}list_movies.jsonmovie_details.json`;
+const MOVIE_DETAIL_URL = `${BASE_URL}movie_details.json`;
 const MOVIES_SUGGESTIONS_URL = `${BASE_URL}movie_suggestions.json`;
 
 export const getMovies = async (limit, rating) => {
